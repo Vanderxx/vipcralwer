@@ -6,6 +6,7 @@ from urllib2 import urlopen, Request
 from urllib import urlencode
 import json
 import re
+from os import path
 
 request_type = {
     'follower': 'http://moer.jiemian.com/wapcommon_findMyFansCount.json',
@@ -62,14 +63,15 @@ def fetch_article_id(url):
     return int(match.group(0))
 
 
+def import_history(history_set):
+    if path.exists('history.txt'):
+        with open('history.txt', 'r') as f:
+            for each_line in f:
+                lists = each_line.split('\t\t')
+                history_set.add(lists[1])
+
+
 if __name__ == '__main__':
-    # start_url = 'http://moer.jiemian.com/investment_findPageList.htm?'
-    # extracted_url = 'authorHome.htm?theId=107801495'
-    #
-    # print complete_url(start_url, extracted_url)
-    # test_type = 'follower'
-    # test_user_id = 104451284
-    # print simple_post(test_type, test_user_id)
-    # url = 'http://moer.jiemian.com/findArticleStockInfo.htm?articleId=100738'
-    # print fetch_article_id(url)
-    print ''
+    test_set = set()
+    import_history(test_set)
+    print test_set

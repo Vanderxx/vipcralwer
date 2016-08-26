@@ -27,3 +27,4 @@ class ArticleItem(Item):
     praised_num = Field()
     released_time = Field()
     article_url = Field()
+    article_price = Field()

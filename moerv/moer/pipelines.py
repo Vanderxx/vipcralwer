@@ -20,13 +20,13 @@ class MoerStorePipeline(object):
         self.fd.close()
 
     def process_item(self, item, spider):
-        if spider.name == 'moer':
+        if spider.name == 'moer'or spider.name == 'vip_comment':
             self.fd.write(item['name'] + '\t\t')
             self.fd.write(str(item['id']) + '\t\t')
             self.fd.write(str(item['type']) + '\t\t')
             self.fd.write(str(item['concern_num']) + '\t\t')
             self.fd.write(str(item['followers_num']) + '\t\t')
-            self.fd.write(str(item['article_num']) + '\t\t')
+            self.fd.write(str(item['article_num']))
             self.fd.write('\n')
         return item
 
@@ -59,5 +59,6 @@ class ArticleStorePipeline(object):
             self.fd.write(str(item['released_time']) + '\t\t')
             self.fd.write(str(item['praised_num']) + '\t\t')
             self.fd.write(str(item['article_url']) + '\t\t')
+            self.fd.write(item['article_price'])
             self.fd.write('\n')
         return item
